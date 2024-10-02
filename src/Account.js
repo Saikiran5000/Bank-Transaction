@@ -7,6 +7,7 @@ const Account = () => {
     const data=useSelector((state)=>{
            return state
     })
+    
   return (
     <>
       <div className='container'>
@@ -38,9 +39,9 @@ const Account = () => {
 
                   <tr>
 
-                    <td>{data.balance}</td>
-                    <td>{data.fullName}</td>
-                    <td>{data.mobile}</td>
+                    <td>{data.account.balance}</td>
+                    <td>{data.account.fullName}</td>
+                    <td>{data.account.mobile}</td>
 
 
                   </tr>
@@ -50,8 +51,54 @@ const Account = () => {
 
 
         </table>
+        <h1 className="text-primary">Transaction Details</h1>
 
+        <table className="table table-bordered w-50">
 
+<thead>
+
+    <tr>
+
+        <th>
+            Id
+        </th>
+
+        <th>
+            Amount
+        </th>
+
+        <th>
+            Type
+        </th>
+        <th>Date</th>
+
+    </tr>
+</thead>
+
+<tbody>
+</tbody>
+{
+  data.transaction.map((tr,index)=>(
+    <tr key={tr.id}>
+
+        <td>
+            {tr.id}
+        </td>
+
+        <td>
+            {tr.amount}
+        </td>
+
+        <td>
+            {tr.type}
+        </td>
+        <td>{tr.date.toString()}</td>
+
+    </tr>
+  ))
+}
+
+</table>
 
 
 

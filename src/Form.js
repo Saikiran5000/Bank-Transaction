@@ -6,6 +6,7 @@ const Form = () => {
    const  [amount,setAmount]=useState("");
    const [fullName,setFullName]=useState("");
    const [mobile,setMobile]=useState("");
+   const [transactionId,updateTransactionId]=useState(0)
 
 
     let dispatch= useDispatch();
@@ -28,11 +29,15 @@ const Form = () => {
 
         <button className='btn btn-primary col-1' onClick={()=>{
             dispatch({type:"deposit",payload: amount});
+            updateTransactionId(transactionId+1)
+            dispatch({type:"ADD",payload:{id:transactionId,amount:amount,date:new Date(),type:"Credit"}})
             setAmount("")
         }}>Deposit</button>
 
 <button className='btn btn-danger col-1 mx-2' onClick={()=>{
             dispatch({type:"withdraw",payload: amount});
+            updateTransactionId(transactionId+1)
+            dispatch({type:"ADD",payload:{id:transactionId,amount:amount,date:new Date(),type:"Debit"}})
             setAmount("")
         }}>Withdraw</button>
 

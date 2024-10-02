@@ -1,5 +1,5 @@
 
-import {createStore} from "redux";
+import {combineReducers, createStore} from "redux";
 
 const initialStore={
     mobile:null,
@@ -32,7 +32,27 @@ function accountReducer(state=initialStore,action){
     }
 
 }
-let store=createStore(accountReducer)
+
+function transactionReducer(state=[],action){
+    switch(action.type){
+        case "ADD":
+            return [...state,{id:action.payload.id,amount:action.payload.amount,type:action.payload.type,date:action.payload.date}]
+           default:
+            return state 
+    }
+}
+
+let rootReducer=combineReducers({
+    account:accountReducer,
+    transaction:transactionReducer
+})
+
+
+
+
+
+
+let store=createStore(rootReducer)
 console.log(store.getState())
 
 export default store;
